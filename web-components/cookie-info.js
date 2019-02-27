@@ -1,16 +1,54 @@
-let tmpl = document.createElement('template');
+let tmpl = document.createElement("template");
 tmpl.innerHTML = `
-  <b>I'm in shadow dom!</b>
+ <style>
+ .cookie-info-section {
+  background: rgba(0, 0, 0, 0.1);
+}
+.close-button {
+  display: block;
+  float: right;
+  cursor: pointer;
+}
+
+.not-display {
+  display: none;
+}
+</style>
+
+<div class="cookie-info-section">
+  <a id="close-button">Zamknij</a>
+  <h4>Cookies</h4>
+  <p>
+    Nasza strona wykorzystuje pliki cookies w celu zapamiętywania preferencji i
+    ustawień oraz zbierania anonimowych danych dla celów reklamowych i
+    statystycznych. Korzystając ze strony, wyrażasz zgodę na wykorzystywanie
+    plików cookies. Możesz w każdym czasie określić sposób wykorzystywania
+    plików cookies w ustawieniach swojej przeglądarki internetowej. Jeżeli
+    pozostawisz te ustawienia bez zmian, pliki cookies zostaną zapisane w
+    pamięci Twojego urządzenia. Zmiana ustawień plików cookies może ograniczyć
+    funkcjonalność serwisu.
+  </p>
+</div>
+
   
 `;
 
-class IdCheck extends HTMLElement {
+class CookieInfo extends HTMLElement {
   constructor() {
     super();
 
-    let shadowRoot = this.attachShadow({ mode: 'open' });
-    shadowRoot.appendChild(tmpl.content.cloneNode(true));
+    let template = tmpl.content.cloneNode(true);
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template);
+
+    let closeButton = this.shadowRoot.querySelector("#close-button");
+
+    closeButton.addEventListener("click", this.hide);
+  }
+
+  hide() {
+    this.parentElement.classList.add("not-display");
   }
 }
 
-customElements.define('cookie-info', IdCheck);
+customElements.define("cookie-info", CookieInfo);
