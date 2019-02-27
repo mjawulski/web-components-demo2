@@ -13,6 +13,10 @@ tmpl.innerHTML = `
 .not-display {
   display: none;
 }
+
+h4{
+  color: red;
+}
 </style>
 
 <div class="cookie-info-section">
