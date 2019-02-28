@@ -1,0 +1,7 @@
+{
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#e4bb07",
+    "titleBar.activeForeground": "#000000"
+  },
+  "prettier.singleQuote": false
+}
